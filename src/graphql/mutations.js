@@ -9,7 +9,7 @@ export const LOGIN = gql`
         screen
         token
         id
-        student {
+        user {
           id
           firstName
           lastName
@@ -26,95 +26,150 @@ export const LOG_OUT = gql`
   }
 `;
 
-export const ADD_COURSE = gql`
-  mutation AddCourse($courseCode: String!, $courseName: String!, $section: String!, $semester: String!) {
-    addCourse(courseCode: $courseCode, courseName: $courseName, section: $section, semester: $semester) {
+export const ADD_VITAL = gql`
+  mutation AddVital($age: String!
+                    , $sex: String!
+                    , $cp: String!
+                    , $trestbps: String!
+                    , $chol: String!
+                    , $restecg: String!
+                    , $thalach: String!
+                    , $exang: String!
+                    , $oldpeak: String!
+                    , $slope: String!
+                    , $ca: String!
+                    , $thal: String!
+                    ) {
+    addVital(age: $age
+             , sex: $sex
+             , cp: $cp
+             , trestbps: $trestbps
+             , chol: $chol
+             , restecg: $restecg
+             , thalach: $thalach
+             , exang: $exang
+             , oldpeak: $oldpeak
+             , slope: $slope
+             , ca: $ca
+             , thal: $thal
+             ) {
       id
-      courseCode
-      courseName
-      section
-      semester
+      age
+      sex
+      cp
+      trestbps
+      chol
+      restecg
+      thalach
+      exang
+      oldpeak
+      slope
+      ca
+      thal
     }
   }
 `;
 
-export const UPDATE_COURSE = gql`
-  mutation UpdateCourse($id: ID!, $courseCode: String!, $courseName: String!, $section: String!, $semester: String!) {
-    updateCourse(id: $id, courseCode: $courseCode, courseName: $courseName, section: $section, semester: $semester) {
+export const UPDATE_VITAL = gql`
+  mutation UpdateVital($id: ID!
+                    , $age: String!
+                    , $sex: String!
+                    , $cp: String!
+                    , $trestbps: String!
+                    , $chol: String!
+                    , $restecg: String!
+                    , $thalach: String!
+                    , $exang: String!
+                    , $oldpeak: String!
+                    , $slope: String!
+                    , $ca: String!
+                    , $thal: String!
+                    ) {
+    updateVital(id: $id 
+             , age: $age
+             , sex: $sex
+             , cp: $cp
+             , trestbps: $trestbps
+             , chol: $chol
+             , restecg: $restecg
+             , thalach: $thalach
+             , exang: $exang
+             , oldpeak: $oldpeak
+             , slope: $slope
+             , ca: $ca
+             , thal: $thal
+             ) {
       id
-      courseCode
-      courseName
-      section
-      semester
+      age
+      sex
+      cp
+      trestbps
+      chol
+      restecg
+      thalach
+      exang
+      oldpeak
+      slope
+      ca
+      thal
     }
   }
 `;
 
-export const ENROLL_COURSE = gql`
-  mutation EnrollCourse($studentId: ID!, $courseId: ID!) {
-    enrollCourse(studentId: $studentId, courseId: $courseId) {
+export const ADD_USER = gql`
+  mutation AddUser($email: String!
+  				   , $password: String!
+  				   , $firstName: String!
+  				   , $lastName: String!
+  				   , $roles: String!
+  				   , $active: Boolean!
+  				   ) {
+    addUser($email: String!
+  		    , $password: String!
+  	        , $firstName: String!
+            , $lastName: String!
+            , $roles: String!
+            , $active: Boolean!
+    		) {
       id
-      courseCode
-      courseName
-      section
-      semester
-    }
-  }
-`;
-
-export const DROP_COURSE = gql`
-  mutation DropCourse($studentId: ID!, $courseId: ID!) {
-    dropCourse(studentId: $studentId, courseId: $courseId) {
-      id
-      courseCode
-      courseName
-      section
-      semester
-    }
-  }
-`;
-
-export const ADD_STUDENT = gql`
-  mutation AddStudent($studentNumber: String!, $firstName: String!, $lastName: String!, $phone: String!, $program: String!, $email: String!, $password: String!, $favoriteTopic: String!, $strongestTechnicalSkill: String!) {
-    addStudent(studentNumber: $studentNumber, firstName: $firstName, lastName: $lastName, phone: $phone, program: $program, email: $email, password: $password, favoriteTopic: $favoriteTopic, strongestTechnicalSkill: $strongestTechnicalSkill) {
-      id
-      studentNumber
-      firstName
-      lastName
-      phone
-      program
       email
       password
-      favoriteTopic
-      strongestTechnicalSkill
-    }
-  }
-`;
-
-export const UPDATE_STUDENT = gql`
-  mutation UpdateStudent($id: ID!, $studentNumber: String!, $firstName: String!, $lastName: String!, $email: String!, $phone: String!, $program: String!, $password: String!, $favoriteTopic: String!, $strongestTechnicalSkill: String!) {
-    updateStudent(id: $id, studentNumber: $studentNumber, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, program: $program, password: $password, favoriteTopic: $favoriteTopic, strongestTechnicalSkill: $strongestTechnicalSkill) {
-      id
-      studentNumber
       firstName
       lastName
-      phone
-      program
-      email
-      password
-      favoriteTopic
-      strongestTechnicalSkill
+      roles
+      active
     }
   }
 `;
 
-export const DELETE_STUDENT = gql`
-  mutation DeleteStudent($id: ID!) {
-    deleteStudent(id: $id) {
+export const UPDATE_USER = gql`
+  mutation UpdateUser($id: ID!
+  						 , $email: String!
+  						 , $password: String!
+  						 , $firstName: String!
+  						 , $lastName: String!
+  						 , $roles: String!
+  						 , $active: Boolean!
+  						 ) {
+    updateUser(id: $id
+    			  , email: $email
+    			  , password: $password
+    			  , firstName: $firstName
+    			  , lastName: $lastName
+    			  , roles: $roles
+    			  , active: $active
+				  ) {
       id
+      email
+      password
+      firstName
+      lastName
+      roles
+      active
     }
   }
 `;
+
 //Nurse Mutations
 export const CREATE_TIP = gql`
     mutation CreateTip(
@@ -129,4 +184,4 @@ export const CREATE_TIP = gql`
             description
         }
     }
-`;
+`;    
