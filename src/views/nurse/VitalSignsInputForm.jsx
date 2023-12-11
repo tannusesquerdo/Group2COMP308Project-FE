@@ -179,16 +179,6 @@ function VitalSignsInputForm({ patientId }) {
                 </Form.Control>
               </div>
 
-              {/* Diagnosis of Heart Disease (num) */}
-              <div className="mb-3">
-                <CFormLabel htmlFor='num'>Diagnosis of Heart Disease (Angiographic Disease Status)</CFormLabel>
-                <Form.Control as="select" name="num" id="num" value={vitals.num} onChange={handleChange}>
-                  <option value="">Select</option>
-                  <option value="0">Less than 50% Diameter Narrowing</option>
-                  <option value="1">More than 50% Diameter Narrowing</option>
-                </Form.Control>
-              </div>
-
               {/* Update Date */}
               <div className="mb-3">
                 <CFormLabel htmlFor='updateDate'>Update Date</CFormLabel>
