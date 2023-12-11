@@ -2,7 +2,7 @@
  * Last Modified by Harpreet Kaur on 12/10/2023
  * Component: VitalSignsInputForm
  * Responsible for allowing nurses to input vital signs data as per model
- * This form includes fields all the input fields in form as per model.
+ * This form includes all the input fields in form as per model.
  * Props: 
  *  - onSubmit: Function to handle form submission and data storage.
  */

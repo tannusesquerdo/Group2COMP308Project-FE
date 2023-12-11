@@ -1,56 +1,89 @@
-/**
- * Last Modified by T. Jemison on 12/04/2023
- * Component: DailyMotivationalTips
- * Allows nurses to enter and store motivational tips for patients.
- * Nurses can add tips which are stored in the database for daily viewing by patients.
- * Props: 
- *  - saveMotivationalTips: Function to handle saving of motivational tips to the database.
- */
-import React, { useState } from 'react';
+//Imports
+import React from 'react';
+import { gql, useMutation } from '@apollo/client';
+import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { CCard, CCardBody, CCardHeader, CCol, CRow, CForm, CFormLabel } from '@coreui/react';
-import { toast } from 'react-toastify';
+//import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
+import { 
+    Box, 
+    Button,
+    Container,
+    FormControl,
+    TextField,
+} from '@mui/material';
+//
+import { useNavigate } from 'react-router-dom';
 
-function DailyMotivationalTips() {
-  const [motivationalTip, setMotivationalTip] = useState('');
+//Create gql for Tips
 
-  const saveMotivationalTip = (e) => {
-    e.preventDefault();
-    // Logic to handle saving the motivational tip to the database
-    // Use motivationalTip state to access entered tip and proceed accordingly
-    toast.success('Motivational tip saved successfully');
-    // Additional logic for saving data to the database
-  };
+const CREATE_TIP = gql`
+    mutation CreateTip(
+        $title: String!
+        $description: String!
+    ) {
+        createTip(
+            title: $title
+            description: $description
+        ) {
+            title
+            description
+        }
+    }
+`;
 
-  const onChange = (e) => {
-    e.persist();
-    setMotivationalTip(e.target.value);
-  };
+function CreateTip() {
+    let navigate = useNavigate();
+    let title, description;
+    const [createTip, { data, loading, error }] = useMutation(CREATE_TIP);
+    if (loading) return 'Submitting...';
+    if (error) return `Submission error! ${error.message}`;
+    return (
 
-  return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Daily Motivational Tip</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CForm onSubmit={saveMotivationalTip}>
-              <div className="mb-3">
-                <CFormLabel htmlFor='motivationalTip'>Enter Tip</CFormLabel>
-                <Form.Control as="textarea" rows={3} name="motivationalTip" id="motivationalTip" placeholder="Enter your motivational tip" value={motivationalTip} onChange={onChange} />
-              </div>
-                            
-              <Button variant="primary" type="submit">
-                Save Tip
-              </Button>
-            </CForm>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-  );
+        <Container maxWidth="xs">
+            <Box sx={{ mt: 5, display: 'flex', flexWrap: 'wrap' }}></Box>
+            <form
+                onSubmit={e => { 
+                    e.preventDefault();
+                    createTip({
+                        variables: {
+                            title: title.value,
+                            description: description.value
+                        }
+                    });
+                    title.value = '';
+                    description.value = '';
+                    navigate('/tips');
+                }}
+            >
+                <Form.Group>
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control type="text" ref={node => {
+                        title = node;
+                    }} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control as="textarea" ref={node => {
+                        description = node;
+                    }} />
+                </Form.Group>
+                <Box sx={{mt: 2}} style={{display: 'flex', flexDirection: 'column', textAlign: 'center', width:'100%'}}>
+                    <div>
+                        <Button
+                            type="submit"
+                            color="primary"
+                            variant="contained"
+                            className="button"
+                        > Submit </Button>
+                    </div>
+                </Box>
+            </form>
+        </Container>
+    );
 }
 
-export default DailyMotivationalTips;
+export default CreateTip;
+
+
+
