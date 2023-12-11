@@ -21,13 +21,14 @@ const loading = (
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
 const Login = React.lazy(() => import('./views/pages/Login'));
+const VitalSignsInputForm = React.lazy(() => import('./views/nurse/VitalSignsInputForm'));
 
 const router = createBrowserRouter([
   {
     exact: true,
-    path: "/login",
-    name: 'Login Page',
-    element: <Login />,
+    path: "/vital-signs-input-form",
+    name: 'Vital Signs Input Form',
+    element: <VitalSignsInputForm />,
   },
   {
     path: "*",
