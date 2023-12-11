@@ -15,9 +15,7 @@ import {
 //
 import { useNavigate } from 'react-router-dom';
 
-//Create gql for Tips
-
-const CREATE_TIP = gql`
+export const CREATE_TIP = gql`
     mutation CreateTip(
         $title: String!
         $description: String!
@@ -31,7 +29,6 @@ const CREATE_TIP = gql`
         }
     }
 `;
-
 function CreateTip() {
     let navigate = useNavigate();
     let title, description;

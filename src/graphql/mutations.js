@@ -115,3 +115,18 @@ export const DELETE_STUDENT = gql`
     }
   }
 `;
+
+export const CREATE_TIP = gql`
+    mutation CreateTip(
+        $title: String!
+        $description: String!
+    ) {
+        createTip(
+            title: $title
+            description: $description
+        ) {
+            title
+            description
+        }
+    }
+`;
