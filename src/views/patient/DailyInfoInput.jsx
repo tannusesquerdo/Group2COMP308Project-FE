@@ -1,5 +1,5 @@
 /**
- * Last Modified by T. Jemison on 12/04/23
+ * Last Modified by T. Jemison on 12/11/23
  * Component: DailyInfoInput
  * Responsible for allowing patients to enter daily information.
  * This form includes fields for pulse rate, blood pressure, weight, temperature, and respiratory rate.
@@ -20,15 +20,14 @@ import {
   CFormLabel
 } from '@coreui/react';
 import { toast } from 'react-toastify';
-// Additional imports needed for this component
 
 function DailyInfoInput() {
   const [dailyInfo, setDailyInfo] = useState({
     pulseRate: '',
-    bloodPressure: '',
+    bloodPresure: '', // Updated field name to match Mongoose schema
     weight: '',
     temperature: '',
-    respiratoryRate: '',
+    respRate: '', // Updated field name to match Mongoose schema
     // Add more fields as needed
   });
 
@@ -59,8 +58,8 @@ function DailyInfoInput() {
                 <Form.Control type="text" name="pulseRate" id="pulseRate" placeholder="Enter Pulse Rate" value={dailyInfo.pulseRate} onChange={onChange} />
               </div>
               <div className="mb-3">
-                <CFormLabel htmlFor='bloodPressure'>Blood Pressure</CFormLabel>
-                <Form.Control type="text" name="bloodPressure" id="bloodPressure" placeholder="Enter Blood Pressure" value={dailyInfo.bloodPressure} onChange={onChange} />
+                <CFormLabel htmlFor='bloodPresure'>Blood Pressure</CFormLabel>
+                <Form.Control type="text" name="bloodPresure" id="bloodPresure" placeholder="Enter Blood Pressure" value={dailyInfo.bloodPresure} onChange={onChange} />
               </div>
               <div className="mb-3">
                 <CFormLabel htmlFor='weight'>Weight</CFormLabel>
@@ -71,8 +70,8 @@ function DailyInfoInput() {
                 <Form.Control type="text" name="temperature" id="temperature" placeholder="Enter Temperature" value={dailyInfo.temperature} onChange={onChange} />
               </div>
               <div className="mb-3">
-                <CFormLabel htmlFor='respiratoryRate'>Respiratory Rate</CFormLabel>
-                <Form.Control type="text" name="respiratoryRate" id="respiratoryRate" placeholder="Enter Respiratory Rate" value={dailyInfo.respiratoryRate} onChange={onChange} />
+                <CFormLabel htmlFor='respRate'>Respiratory Rate</CFormLabel>
+                <Form.Control type="text" name="respRate" id="respRate" placeholder="Enter Respiratory Rate" value={dailyInfo.respRate} onChange={onChange} />
               </div>
                             
               <Button variant="primary" type="submit">
