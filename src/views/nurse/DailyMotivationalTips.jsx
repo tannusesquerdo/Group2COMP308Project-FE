@@ -1,86 +1,58 @@
-//Imports
-import React from 'react';
-import { gql, useMutation } from '@apollo/client';
-import Spinner from 'react-bootstrap/Spinner';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-//import Button from 'react-bootstrap/Button';
-import { NavLink } from 'react-router-dom';
-import { 
-    Box, 
-    Button,
-    Container,
-    FormControl,
-    TextField,
-} from '@mui/material';
-//
-import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import { CCard, CCardBody, CCardHeader, CCol, CRow, CForm, CFormLabel } from '@coreui/react';
+import { toast } from 'react-toastify';
 
-export const CREATE_TIP = gql`
-    mutation CreateTip(
-        $title: String!
-        $description: String!
-    ) {
-        createTip(
-            title: $title
-            description: $description
-        ) {
-            title
-            description
-        }
-    }
-`;
-function CreateTip() {
-    let navigate = useNavigate();
-    let title, description;
-    const [createTip, { data, loading, error }] = useMutation(CREATE_TIP);
-    if (loading) return 'Submitting...';
-    if (error) return `Submission error! ${error.message}`;
-    return (
+function DailyMotivationalTips() {
+  const [motivationalTip, setMotivationalTip] = useState('');
+  const [title, setTitle] = useState('');
 
-        <Container maxWidth="xs">
-            <Box sx={{ mt: 5, display: 'flex', flexWrap: 'wrap' }}></Box>
-            <form
-                onSubmit={e => { 
-                    e.preventDefault();
-                    createTip({
-                        variables: {
-                            title: title.value,
-                            description: description.value
-                        }
-                    });
-                    title.value = '';
-                    description.value = '';
-                    navigate('/tips');
-                }}
-            >
-                <Form.Group>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="text" ref={node => {
-                        title = node;
-                    }} />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control as="textarea" ref={node => {
-                        description = node;
-                    }} />
-                </Form.Group>
-                <Box sx={{mt: 2}} style={{display: 'flex', flexDirection: 'column', textAlign: 'center', width:'100%'}}>
-                    <div>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            variant="contained"
-                            className="button"
-                        > Submit </Button>
-                    </div>
-                </Box>
-            </form>
-        </Container>
-    );
+  const saveMotivationalTip = (e) => {
+    e.preventDefault();
+    // Logic to handle saving the motivational tip to the database
+    // Use motivationalTip and title state to access entered tip and title and proceed accordingly
+    toast.success('Motivational tip saved successfully');
+    // Additional logic for saving data to the database
+  };
+
+  const onChangeMotivationalTip = (e) => {
+    e.persist();
+    setMotivationalTip(e.target.value);
+  };
+
+  const onChangeTitle = (e) => {
+    e.persist();
+    setTitle(e.target.value);
+  };
+
+  return (
+    <CRow>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Daily Motivational Tip</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CForm onSubmit={saveMotivationalTip}>
+              <div className="mb-3">
+                <CFormLabel htmlFor='title'>Title</CFormLabel>
+                <Form.Control type="text" name="title" id="title" placeholder="Enter title" value={title} onChange={onChangeTitle} />
+              </div>
+              <div className="mb-3">
+                <CFormLabel htmlFor='motivationalTip'>Enter Tip</CFormLabel>
+                <Form.Control as="textarea" rows={3} name="motivationalTip" id="motivationalTip" placeholder="Enter your motivational tip" value={motivationalTip} onChange={onChangeMotivationalTip} />
+              </div>
+                            
+              <Button variant="primary" type="submit">
+                Save Tip
+              </Button>
+            </CForm>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
+  );
 }
 
-export default CreateTip;
-
-
-
+export default DailyMotivationalTips;

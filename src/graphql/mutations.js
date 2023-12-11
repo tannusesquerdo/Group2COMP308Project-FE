@@ -115,7 +115,7 @@ export const DELETE_STUDENT = gql`
     }
   }
 `;
-
+//Nurse Mutations
 export const CREATE_TIP = gql`
     mutation CreateTip(
         $title: String!
