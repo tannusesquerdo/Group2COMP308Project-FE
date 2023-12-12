@@ -156,12 +156,12 @@ export const ADD_USER = gql`
     , $active: Boolean!
   ) {
     createNewUser(
-      $email: String!
-      , $password: String!
-      , $firstName: String!
-      , $lastName: String!
-      , $roles: String!
-      , $active: Boolean!
+      email: $email
+      , password: $password
+      , firstName: $firstName
+      , lastName: $lastName
+      , roles: $roles
+      , active: $active
     ) {
       id
       email
