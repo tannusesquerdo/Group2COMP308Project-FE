@@ -59,6 +59,7 @@ export const GET_VITAL = gql`
 export const GET_DAILYVITAL = gql`
   query GetDailyVital($patient: ID!) {
     getDailyVital(patient: $patient) {
+      id
       pulseRate
       bloodPresure
       weight
@@ -72,6 +73,7 @@ export const GET_DAILYVITAL = gql`
 export const GET_TIP = gql`
   query GetTip {
     getTip {
+      id
       title
       description
     }
@@ -81,6 +83,7 @@ export const GET_TIP = gql`
 export const GET_ALERT = gql`
   query GetAlert($patient: ID!) {
     getAlert(patient: $patient) {
+      id
       message
       address
       phone
@@ -92,6 +95,7 @@ export const GET_ALERT = gql`
 export const GET_ALERTS = gql`
   query GetAlerts {
     getAlerts {
+      id
       message
       address
       phone
