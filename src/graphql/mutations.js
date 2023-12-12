@@ -30,26 +30,30 @@ export const LOG_OUT = gql`
 
 export const ADD_VITAL = gql`
   mutation AddVital(
-    $age: String!
-    , $sex: String!
-    , $cp: String!
-    , $trestbps: String!
-    , $chol: String!
-    , $restecg: String!
-    , $thalach: String!
-    , $exang: String!
-    , $oldpeak: String!
-    , $slope: String!
-    , $ca: String!
-    , $thal: String!
+    $age: Int!
+    , $sex: Int!
+    , $cp: Int!
+    , $trestbps: Float!
+    , $chol: Float!
+    , $fbs: Int!
+    , $restecg: Int!
+    , $thalach: Float!
+    , $exang: Float!
+    , $oldpeak: Float!
+    , $slope: Int!
+    , $ca: Int!
+    , $thal: Int!
+    , $num: Int!
+    , $updateDate: String!
     , $patient: ID!
   ) {
-    addVital(
+    createNewVital(
       age: $age
       , sex: $sex
       , cp: $cp
       , trestbps: $trestbps
       , chol: $chol
+      , fbs: $fbs
       , restecg: $restecg
       , thalach: $thalach
       , exang: $exang
@@ -57,6 +61,8 @@ export const ADD_VITAL = gql`
       , slope: $slope
       , ca: $ca
       , thal: $thal
+      , num: $num
+      , updateDate: $updateDate
       , patient: $patient
     ) {
       id
@@ -65,6 +71,7 @@ export const ADD_VITAL = gql`
       cp
       trestbps
       chol
+      fbs
       restecg
       thalach
       exang
@@ -72,6 +79,8 @@ export const ADD_VITAL = gql`
       slope
       ca
       thal
+      num
+      updateDate
       patient
     }
   }
@@ -80,18 +89,21 @@ export const ADD_VITAL = gql`
 export const UPDATE_VITAL = gql`
   mutation UpdateVital(
     $id: ID!
-    , $age: String!
-    , $sex: String!
-    , $cp: String!
-    , $trestbps: String!
-    , $chol: String!
-    , $restecg: String!
-    , $thalach: String!
-    , $exang: String!
-    , $oldpeak: String!
-    , $slope: String!
-    , $ca: String!
-    , $thal: String!
+    , $age: Int!
+    , $sex: Int!
+    , $cp: Int!
+    , $trestbps: Float!
+    , $chol: Float!
+    , $fbs: Int!
+    , $restecg: Int!
+    , $thalach: Float!
+    , $exang: Float!
+    , $oldpeak: Float!
+    , $slope: Int!
+    , $ca: Int!
+    , $thal: Int!
+    , $num: Int!
+    , $updateDate: String!
     , $patient: ID!
     ) {
     updateVital(
@@ -101,6 +113,7 @@ export const UPDATE_VITAL = gql`
       , cp: $cp
       , trestbps: $trestbps
       , chol: $chol
+      , fbs: $fbs
       , restecg: $restecg
       , thalach: $thalach
       , exang: $exang
@@ -108,6 +121,8 @@ export const UPDATE_VITAL = gql`
       , slope: $slope
       , ca: $ca
       , thal: $thal
+      , num: $num
+      , updateDate: $updateDate
       , patient: $patient
     ) {
       id
@@ -116,6 +131,7 @@ export const UPDATE_VITAL = gql`
       cp
       trestbps
       chol
+      fbs
       restecg
       thalach
       exang
@@ -123,6 +139,8 @@ export const UPDATE_VITAL = gql`
       slope
       ca
       thal
+      num
+      updateDate
       patient
     }
   }
@@ -137,7 +155,7 @@ export const ADD_USER = gql`
     , $roles: String!
     , $active: Boolean!
   ) {
-    addUser(
+    createNewUser(
       $email: String!
       , $password: String!
       , $firstName: String!
@@ -192,7 +210,7 @@ export const CREATE_TIP = gql`
     $title: String!
     , $description: String!
   ) {
-    createTip(
+    createNewTip(
       title: $title
       , description: $description
     ) {
@@ -211,7 +229,7 @@ export const CREATE_DAILYVITAL = gql`
     , $respRate: Float!
     , $patient: ID!
   ) {
-    createTip(
+    createNewDailyVital(
       pulseRate: $pulseRate
       , bloodPresure: $bloodPresure
       , weight: $weight
@@ -236,7 +254,7 @@ export const CREATE_ALERT = gql`
     , $phone: String!
     , $patient: ID!
   ) {
-    createTip(
+    createNewAlert(
       message: $message
       , address: $address
       , phone: $phone

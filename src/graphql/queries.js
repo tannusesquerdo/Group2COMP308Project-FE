@@ -22,9 +22,9 @@ export const IS_LOGGED_IN = gql`
   }
 `;
 
-export const GET_USER = gql`
-  query GetUser {
-    user {
+export const GET_USERS = gql`
+  query GetUsers {
+    getAllUsers {
       id
       email
       firstName
@@ -37,7 +37,7 @@ export const GET_USER = gql`
 
 export const GET_VITAL = gql`
   query GetVital($patient: ID!) {
-    vital(patient: $patient) {
+    getVital(patient: $patient) {
       id
       age
       sex
@@ -58,7 +58,7 @@ export const GET_VITAL = gql`
 
 export const GET_DAILYVITAL = gql`
   query GetDailyVital($patient: ID!) {
-    dailyVital(patient: $patient) {
+    getDailyVital(patient: $patient) {
       pulseRate
       bloodPresure
       weight
@@ -69,9 +69,18 @@ export const GET_DAILYVITAL = gql`
   }
 `;
 
+export const GET_TIP = gql`
+  query GetTip {
+    getTip {
+      title
+      description
+    }
+  }
+`;
+
 export const GET_ALERT = gql`
   query GetAlert($patient: ID!) {
-    alert(patient: $patient) {
+    getAlert(patient: $patient) {
       message
       address
       phone
@@ -82,7 +91,7 @@ export const GET_ALERT = gql`
 
 export const GET_ALERTS = gql`
   query GetAlerts {
-    alert {
+    getAlerts {
       message
       address
       phone
