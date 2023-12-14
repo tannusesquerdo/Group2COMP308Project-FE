@@ -71,7 +71,6 @@ const CreateDailyVital = () => {
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Record Daily Vital</strong>
-            <h1>THIS IS A BUGGGG</h1>
           </CCardHeader>
           <CCardBody>
             <CForm onSubmit={handleSubmit}>
