@@ -1,7 +1,7 @@
 import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import Spinner from 'react-bootstrap/Spinner';
-import { CREATE_VITAL_ALERT } from '../../graphql/mutations';
+import { CREATE_ALERT } from '../../graphql/mutations';
 import { useNavigate } from 'react-router-dom';
 import {
     Box,
@@ -18,7 +18,7 @@ function CreateVitalAlert() {
         phone: '',
         patientId: ''
     });
-    const [createVitalAlert, { loading, error }] = useMutation(CREATE_VITAL_ALERT);
+    const [createVitalAlert, { loading, error }] = useMutation(CREATE_ALERT);
 
     const handleChange = (e) => {
         setFormData({
