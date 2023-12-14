@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
@@ -6,14 +6,13 @@ export const IS_LOGGED_IN = gql`
       status
       message
       data {
-        screen
         token
-        id
-        student {
+        user {
           id
           firstName
           lastName
           email
+          roles
         }
       }
     }

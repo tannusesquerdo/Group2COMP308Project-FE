@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
@@ -6,14 +6,13 @@ export const LOGIN = gql`
       status
       message
       data {
-        screen
         token
-        id
-        student {
+        user {
           id
           firstName
           lastName
           email
+          roles
         }
       }
     }
@@ -27,8 +26,18 @@ export const LOG_OUT = gql`
 `;
 
 export const ADD_COURSE = gql`
-  mutation AddCourse($courseCode: String!, $courseName: String!, $section: String!, $semester: String!) {
-    addCourse(courseCode: $courseCode, courseName: $courseName, section: $section, semester: $semester) {
+  mutation AddCourse(
+    $courseCode: String!
+    $courseName: String!
+    $section: String!
+    $semester: String!
+  ) {
+    addCourse(
+      courseCode: $courseCode
+      courseName: $courseName
+      section: $section
+      semester: $semester
+    ) {
       id
       courseCode
       courseName
@@ -39,8 +48,20 @@ export const ADD_COURSE = gql`
 `;
 
 export const UPDATE_COURSE = gql`
-  mutation UpdateCourse($id: ID!, $courseCode: String!, $courseName: String!, $section: String!, $semester: String!) {
-    updateCourse(id: $id, courseCode: $courseCode, courseName: $courseName, section: $section, semester: $semester) {
+  mutation UpdateCourse(
+    $id: ID!
+    $courseCode: String!
+    $courseName: String!
+    $section: String!
+    $semester: String!
+  ) {
+    updateCourse(
+      id: $id
+      courseCode: $courseCode
+      courseName: $courseName
+      section: $section
+      semester: $semester
+    ) {
       id
       courseCode
       courseName
@@ -75,8 +96,28 @@ export const DROP_COURSE = gql`
 `;
 
 export const ADD_STUDENT = gql`
-  mutation AddStudent($studentNumber: String!, $firstName: String!, $lastName: String!, $phone: String!, $program: String!, $email: String!, $password: String!, $favoriteTopic: String!, $strongestTechnicalSkill: String!) {
-    addStudent(studentNumber: $studentNumber, firstName: $firstName, lastName: $lastName, phone: $phone, program: $program, email: $email, password: $password, favoriteTopic: $favoriteTopic, strongestTechnicalSkill: $strongestTechnicalSkill) {
+  mutation AddStudent(
+    $studentNumber: String!
+    $firstName: String!
+    $lastName: String!
+    $phone: String!
+    $program: String!
+    $email: String!
+    $password: String!
+    $favoriteTopic: String!
+    $strongestTechnicalSkill: String!
+  ) {
+    addStudent(
+      studentNumber: $studentNumber
+      firstName: $firstName
+      lastName: $lastName
+      phone: $phone
+      program: $program
+      email: $email
+      password: $password
+      favoriteTopic: $favoriteTopic
+      strongestTechnicalSkill: $strongestTechnicalSkill
+    ) {
       id
       studentNumber
       firstName
@@ -92,8 +133,30 @@ export const ADD_STUDENT = gql`
 `;
 
 export const UPDATE_STUDENT = gql`
-  mutation UpdateStudent($id: ID!, $studentNumber: String!, $firstName: String!, $lastName: String!, $email: String!, $phone: String!, $program: String!, $password: String!, $favoriteTopic: String!, $strongestTechnicalSkill: String!) {
-    updateStudent(id: $id, studentNumber: $studentNumber, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, program: $program, password: $password, favoriteTopic: $favoriteTopic, strongestTechnicalSkill: $strongestTechnicalSkill) {
+  mutation UpdateStudent(
+    $id: ID!
+    $studentNumber: String!
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $phone: String!
+    $program: String!
+    $password: String!
+    $favoriteTopic: String!
+    $strongestTechnicalSkill: String!
+  ) {
+    updateStudent(
+      id: $id
+      studentNumber: $studentNumber
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      phone: $phone
+      program: $program
+      password: $password
+      favoriteTopic: $favoriteTopic
+      strongestTechnicalSkill: $strongestTechnicalSkill
+    ) {
       id
       studentNumber
       firstName
