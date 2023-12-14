@@ -75,18 +75,18 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Daily Check-In',
-        to: '/patient/daily-info',
-      },
-      {
-        component: CNavItem,
-        name: 'Emergency Alert',
-        to: '/patient/emergency-alert',
+        name: 'Create Vital Signs',
+        to: '/patient/create-vital',
       },
       {
         component: CNavItem,
         name: 'Symptoms Checklist',
         to: '/patient/symptoms-checklist',
+      },
+      {
+        component: CNavItem,
+        name: 'Create Alert',
+        to: '/patient/create-vital-alert',
       }
     ],
   }, 
@@ -102,13 +102,18 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Daily Motivational Tips',
-        to: '/nurse/daily-motivational-tips',
+        name: 'Vital Signs Input Form',
+        to: '/nurse/vital-signs-input-form',
       },
       {
         component: CNavItem,
-        name: 'Vital Signs Input Form',
-        to: '/nurse/vital-signs-input-form',
+        name: 'Create Daily Motivational Tips',
+        to: '/nurse/create-tip',
+      },
+      {
+        component: CNavItem,
+        name: 'Daily Motivational Tips',
+        to: '/nurse/list-tip',
       },
       {
         component: CNavItem,
@@ -119,6 +124,16 @@ const _nav = [
         component: CNavItem,
         name: 'Medical Conditions List',
         to: '/nurse/medical-conditions-lists',
+      },
+      {
+        component: CNavItem,
+        name: 'Alert List',
+        to: '/nurse/alert-list',
+      },
+      {
+        component: CNavItem,
+        name: 'Patient List',
+        to: '/nurse/patients',
       }
     ],
   },

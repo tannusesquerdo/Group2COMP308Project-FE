@@ -70,6 +70,9 @@ function UserList() {
                       <Button variant="danger" onClick={() => handleDelete(user.id)}>
                         Delete
                       </Button>
+                      <Button variant="danger" onClick={() => handleDelete(user.id)}>
+                        Predict
+                      </Button>
                     </CTableDataCell>
                   </CTableRow>
                 ))}

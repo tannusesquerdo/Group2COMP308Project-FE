@@ -9,77 +9,97 @@ export const IS_LOGGED_IN = gql`
         screen
         token
         id
-        student {
+        user {
           id
+          email
           firstName
           lastName
-          email
+          roles
+          active
         }
       }
     }
   }
 `;
 
-export const GET_COURSES = gql`
-  query GetCourses {
-    courses {
+export const GET_USERS = gql`
+  query GetUsers {
+    getAllUsers {
       id
-      courseCode
-      courseName
-      section
-      semester
-      students {
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`;
-
-export const GET_STUDENT = gql`
-  query GetStudent($id: ID!) {
-    student(id: $id) {
-      id
-      studentNumber
-      firstName
-      lastName
-      phone
-      program
       email
-      password
-      favoriteTopic
-      strongestTechnicalSkill
-      courses {
-        id
-        courseCode
-        courseName
-        section
-        semester
-      }
-    }
-  }
-`;
-
-export const GET_STUDENT_COURSES = gql`
-  query GetStudentCourses($id: ID!) {
-    studentCourses(id: $id) {
-      id
-      courseCode
-      courseName
-      section
-      semester
-    }
-  }
-`;
-
-export const GET_STUDENTS = gql`
-  query GetStudents {
-    students {
-      id
-      studentNumber
       firstName
       lastName
+      roles
+      active
+    }
+  }
+`;
+
+export const GET_VITAL = gql`
+  query GetVital($patient: ID!) {
+    getVital(patient: $patient) {
+      id
+      age
+      sex
+      cp
+      trestbps
+      chol
+      restecg
+      thalach
+      exang
+      oldpeak
+      slope
+      ca
+      thal
+      patient
+    }
+  }
+`;
+
+export const GET_DAILYVITAL = gql`
+  query GetDailyVital($patient: ID!) {
+    getDailyVital(patient: $patient) {
+      id
+      pulseRate
+      bloodPresure
+      weight
+      temperature
+      respRate
+      patient
+    }
+  }
+`;
+
+export const GET_TIP = gql`
+  query GetTip {
+    getTip {
+      id
+      title
+      description
+    }
+  }
+`;
+
+export const GET_ALERT = gql`
+  query GetAlert($patient: ID!) {
+    getAlert(patient: $patient) {
+      id
+      message
+      address
+      phone
+      patient
+    }
+  }
+`;
+
+export const GET_ALERTS = gql`
+  query GetAlerts {
+    getAlerts {
+      id
+      message
+      address
+      phone
+      patient
     }
   }
 `;
