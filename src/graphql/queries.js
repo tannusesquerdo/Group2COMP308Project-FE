@@ -56,19 +56,7 @@ export const GET_VITAL = gql`
   }
 `;
 
-export const GET_DAILYVITAL = gql`
-  query GetDailyVital($patient: ID!) {
-    getDailyVital(patient: $patient) {
-      id
-      pulseRate
-      bloodPresure
-      weight
-      temperature
-      respRate
-      patient
-    }
-  }
-`;
+
 
 export const GET_TIP = gql`
   query GetTip {
@@ -99,6 +87,21 @@ export const GET_ALERTS = gql`
       message
       address
       phone
+      patient
+    }
+  }
+`;
+
+export const GET_DAILY_VITAL = gql`
+  query GetDailyVital($patient: ID!) {
+    getDailyVital(patient: $patient) {
+      id
+      pulseRate
+      bloodPresure
+      weight
+      temperature
+      respRate
+      updateDate
       patient
     }
   }

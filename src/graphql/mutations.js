@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
@@ -31,64 +31,40 @@ export const LOG_OUT = gql`
 export const ADD_VITAL = gql`
   mutation AddVital(
     $age: Int!
-    $sex: Int!
-    $cp: Int!
-    $trestbps: Float!
-    $chol: Float!
-    $fbs: Int!
-    $restecg: Int!
-    $thalach: Float!
-    $exang: Float!
-    $oldpeak: Float!
-    $slope: Int!
-    $ca: Int!
-    $thal: Int!
-    $num: Int!
-    $updateDate: String!
-    $patient: ID!
+    , $sex: Int!
+    , $cp: Int!
+    , $trestbps: Float!
+    , $chol: Float!
+    , $fbs: Int!
+    , $restecg: Int!
+    , $thalach: Float!
+    , $exang: Float!
+    , $oldpeak: Float!
+    , $slope: Int!
+    , $ca: Int!
+    , $thal: Int!
+    , $num: Int!
+    , $updateDate: String!
+    , $patient: ID!
   ) {
     createNewVital(
       age: $age
-      sex: $sex
-      cp: $cp
-      trestbps: $trestbps
-      chol: $chol
-      fbs: $fbs
-      restecg: $restecg
-      thalach: $thalach
-      exang: $exang
-      oldpeak: $oldpeak
-      slope: $slope
-      ca: $ca
-      thal: $thal
-      num: $num
-      updateDate: $updateDate
-      patient: $patient
+      , sex: $sex
+      , cp: $cp
+      , trestbps: $trestbps
+      , chol: $chol
+      , fbs: $fbs
+      , restecg: $restecg
+      , thalach: $thalach
+      , exang: $exang
+      , oldpeak: $oldpeak
+      , slope: $slope
+      , ca: $ca
+      , thal: $thal
+      , num: $num
+      , updateDate: $updateDate
+      , patient: $patient
     ) {
-      id
-      age
-      sex
-      cp
-      trestbps
-      chol
-      fbs
-      restecg
-      thalach
-      exang
-      oldpeak
-      slope
-      ca
-      thal
-      num
-      updateDate
-      patient
-    }
-  }
-`;
-
-export const GET_VITALS = gql`
-  query GetVitals {
-    vitals {
       id
       age
       sex
@@ -113,41 +89,41 @@ export const GET_VITALS = gql`
 export const UPDATE_VITAL = gql`
   mutation UpdateVital(
     $id: ID!
-    $age: Int!
-    $sex: Int!
-    $cp: Int!
-    $trestbps: Float!
-    $chol: Float!
-    $fbs: Int!
-    $restecg: Int!
-    $thalach: Float!
-    $exang: Float!
-    $oldpeak: Float!
-    $slope: Int!
-    $ca: Int!
-    $thal: Int!
-    $num: Int!
-    $updateDate: String!
-    $patient: ID!
-  ) {
+    , $age: Int!
+    , $sex: Int!
+    , $cp: Int!
+    , $trestbps: Float!
+    , $chol: Float!
+    , $fbs: Int!
+    , $restecg: Int!
+    , $thalach: Float!
+    , $exang: Float!
+    , $oldpeak: Float!
+    , $slope: Int!
+    , $ca: Int!
+    , $thal: Int!
+    , $num: Int!
+    , $updateDate: String!
+    , $patient: ID!
+    ) {
     updateVital(
-      id: $id
-      age: $age
-      sex: $sex
-      cp: $cp
-      trestbps: $trestbps
-      chol: $chol
-      fbs: $fbs
-      restecg: $restecg
-      thalach: $thalach
-      exang: $exang
-      oldpeak: $oldpeak
-      slope: $slope
-      ca: $ca
-      thal: $thal
-      num: $num
-      updateDate: $updateDate
-      patient: $patient
+      id: $id 
+      , age: $age
+      , sex: $sex
+      , cp: $cp
+      , trestbps: $trestbps
+      , chol: $chol
+      , fbs: $fbs
+      , restecg: $restecg
+      , thalach: $thalach
+      , exang: $exang
+      , oldpeak: $oldpeak
+      , slope: $slope
+      , ca: $ca
+      , thal: $thal
+      , num: $num
+      , updateDate: $updateDate
+      , patient: $patient
     ) {
       id
       age
@@ -177,23 +153,22 @@ export const DELETE_VITAL = gql`
     }
   }
 `;
-
 export const ADD_USER = gql`
   mutation AddUser(
     $email: String!
-    $password: String!
-    $firstName: String!
-    $lastName: String!
-    $roles: String!
-    $active: Boolean!
+    , $password: String!
+    , $firstName: String!
+    , $lastName: String!
+    , $roles: String!
+    , $active: Boolean!
   ) {
     createNewUser(
       email: $email
-      password: $password
-      firstName: $firstName
-      lastName: $lastName
-      roles: $roles
-      active: $active
+      , password: $password
+      , firstName: $firstName
+      , lastName: $lastName
+      , roles: $roles
+      , active: $active
     ) {
       id
       email
@@ -206,37 +181,24 @@ export const ADD_USER = gql`
   }
 `;
 
-export const GET_USERS = gql`
-  query GetUsers {
-    getUsers {
-      id
-      email
-      password
-      firstName
-      lastName
-      roles
-      active
-    }
-  }
-`;
 export const UPDATE_USER = gql`
   mutation UpdateUser(
     $id: ID!
-    $email: String!
-    $password: String!
-    $firstName: String!
-    $lastName: String!
-    $roles: String!
-    $active: Boolean!
+    , $email: String!
+    , $password: String!
+    , $firstName: String!
+    , $lastName: String!
+    , $roles: String!
+    , $active: Boolean!
   ) {
     updateUser(
       id: $id
-      email: $email
-      password: $password
-      firstName: $firstName
-      lastName: $lastName
-      roles: $roles
-      active: $active
+      , email: $email
+      , password: $password
+      , firstName: $firstName
+      , lastName: $lastName
+      , roles: $roles
+      , active: $active
     ) {
       id
       email
@@ -262,20 +224,16 @@ export const DELETE_USER = gql`
     }
   }
 `;
-
 // Mutations to create tip
 export const CREATE_TIP = gql`
-  mutation CreateTip($title: String!, $description: String!) {
-    createNewTip(title: $title, description: $description) {
-      title
-      description
-    }
-  }
-`;
-
-export const GET_TIPS = gql`
-  query GetTips {
-    getTips {
+  mutation CreateTip(
+    $title: String!
+    , $description: String!
+  ) {
+    createNewTip(
+      title: $title
+      , description: $description
+    ) {
       title
       description
     }
@@ -300,70 +258,53 @@ export const UPDATE_TIPS = gql`
   }
 `;
 
-export const CREATE_DAILY_VITALS = gql`
-  mutation createDailyVital(
+export const CREATE_DAILY_VITAL = gql`
+  mutation CreateDailyVital(
     $pulseRate: Float!
-    $bloodPressure: Float!
-    $weight: Float!
-    $temperature: Float!
-    $respRate: Float!
-    $updateDate: DateTime!
-    $patientId: ID!
+    , $bloodPresure: Float!
+    , $weight: Float!
+    , $temperature: Float!
+    , $respRate: Float!
+    , $updateDate: DateTime!
+    , $patient: ID!
   ) {
-    createDailyVital(
+    createNewDailyVital(
       pulseRate: $pulseRate
-      bloodPressure: $bloodPressure
-      weight: $weight
-      temperature: $temperature
-      respRate: $respRate
-      updateDate: $updateDate
-      patient: $patientId
+      , bloodPresure: $bloodPresure
+      , weight: $weight
+      , temperature: $temperature
+      , respRate: $respRate
+      , updateDate: $updateDate
+      , patient: $patient
     ) {
       pulseRate
-      bloodPressure
+      bloodPresure
       weight
       temperature
       respRate
       updateDate
-      patient {
-        _id
-      }
+      patient
     }
   }
 `;
 
-export const CREATE_VITAL_ALERT = gql`
-  mutation createVitalAlert(
+export const CREATE_ALERT = gql`
+  mutation CreateAlert(
     $message: String!
-    $address: String!
-    $phone: String!
-    $patientId: ID!
+    , $address: String!
+    , $phone: String!
+    , $patient: ID!
   ) {
-    createVitalAlert(
+    createNewAlert(
       message: $message
-      address: $address
-      phone: $phone
-      patient: $patientId
+      , address: $address
+      , phone: $phone
+      , patient: $patient
     ) {
       message
       address
       phone
-      patient {
-        _id
-      }
-    }
-  }
-`;
-
-export const GET_ALERTS = gql`
-  query getAlerts($patientId: ID!) {
-    getAlerts(patient: $patientId) {
-      message
-      address
-      phone
-      patient {
-        _id
-      }
+      patient
     }
   }
 `;
@@ -374,22 +315,6 @@ export const DELETE_ALERT = gql`
       message
       address
       phone
-      patient {
-        _id
-      }
-    }
-  }
-`;
-
-export const GET_DAILY_VITALS = gql`
-  query getDailyVitals($patientId: ID!) {
-    getDailyVitals(patient: $patientId) {
-      pulseRate
-      bloodPressure
-      weight
-      temperature
-      respRate
-      updateDate
       patient {
         _id
       }
