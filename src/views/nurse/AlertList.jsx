@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import Spinner from 'react-bootstrap/Spinner';
 import { DELETE_ALERT } from '../../graphql/mutations';
-import { GET_ALERT } from '../../graphql/queries';
+import { GET_ALERTS } from '../../graphql/queries';
 
 import { Link } from 'react-router-dom';
 import {
@@ -20,7 +20,7 @@ import {
 } from '@coreui/react';
 import Button from 'react-bootstrap/Button';
 function AlertList() {
-    const { loading, error, data, refetch } = useQuery(GET_ALERT);
+    const { loading, error, data, refetch } = useQuery(GET_ALERTS);
     const [deleteAlert] = useMutation(DELETE_ALERT, {
         onCompleted: () => refetch()
     });
@@ -49,8 +49,6 @@ function AlertList() {
                         <CTable striped hover>
                             <CTableHead>
                                 <CTableRow>
-                                    <CTableHeaderCell>Responder Name</CTableHeaderCell>
-                                    <CTableHeaderCell>Email</CTableHeaderCell>
                                     <CTableHeaderCell>Phone Number</CTableHeaderCell>
                                     <CTableHeaderCell>Patient Name</CTableHeaderCell>
                                     <CTableHeaderCell>Address</CTableHeaderCell>
@@ -59,12 +57,10 @@ function AlertList() {
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
-                                {data.alerts.map((alert) => (
+                                {data.getAlerts.map((alert) => (
                                     <CTableRow key={alert._id}>
-                                        <CTableDataCell>{alert.responderName}</CTableDataCell>
-                                        <CTableDataCell>{alert.email}</CTableDataCell>
-                                        <CTableDataCell>{alert.phoneNumber}</CTableDataCell>
-                                        <CTableDataCell>{alert.patientName}</CTableDataCell>
+                                        <CTableDataCell>{alert.phone}</CTableDataCell>
+                                        <CTableDataCell>{alert.patient}</CTableDataCell>
                                         <CTableDataCell>{alert.address}</CTableDataCell>
                                         <CTableDataCell>{alert.message}</CTableDataCell>
                                         <CTableDataCell>
