@@ -25,7 +25,7 @@ const CreateDailyVital = () => {
     temperature: "",
     respRate: "",
     updateDate: "",
-    patientId: "",
+    patient: "",
   });
   const [createDailyVital, { loading, error }] =
     useMutation(CREATE_DAILY_VITAL);
@@ -141,18 +141,6 @@ const CreateDailyVital = () => {
                   name="updateDate"
                   id="updateDate"
                   value={dailyVital.updateDate}
-                  onChange={onChange}
-                />
-              </div>
-
-              <div className="mb-3">
-                <CFormLabel htmlFor="patientId">Patient ID</CFormLabel>
-                <Form.Control
-                  type="text"
-                  name="patientId"
-                  id="patientId"
-                  placeholder="Enter Patient ID"
-                  value={dailyVital.patientId}
                   onChange={onChange}
                 />
               </div>
