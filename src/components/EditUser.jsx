@@ -3,31 +3,44 @@ import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 //
-import './login.css'
-// this component is used to create a new user
-function CreateUser(props) {
-  let navigate = useNavigate()
-  //
+// this component is used to edit a user
+function EditUser(props) {
+  // Get the userId param from the URL.
+  let { id } = useParams();
+  console.log(id)
+  let navigate = useNavigate();
   const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
-                email: '',username: '',password: '' });
-  const [showLoading, setShowLoading] = useState(false);
-  const apiUrl = "api/";
+  email: '',username: '',password: '' });  
+  const [showLoading, setShowLoading] = useState(true);
+  const apiUrl = "/api/users/" + id;
+  //runs only once after the first render
+  useEffect(() => {
+    setShowLoading(false);
+    //call api
+    const fetchData = async () => {
+      const result = await axios(apiUrl);
+      setUser(result.data);
+      console.log(result.data);
+      setShowLoading(false);
+    };
 
-  const saveUser = (e) => {
+    fetchData();
+  }, []);
+
+  const updateUser = (e) => {
     setShowLoading(true);
     e.preventDefault();
     const data = { firstName: user.firstName, lastName: user.lastName, 
-      email: user.email,username: user.username, password: user.password };
-      //use promises
-      axios.post(apiUrl, data)
+      email: user.email,username: user.username };
+    axios.put(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
         navigate('/show/' + result.data._id)
       }).catch((error) => setShowLoading(false));
   };
-  // handles onChange event
+  //runs when user enters a field
   const onChange = (e) => {
     e.persist();
     setUser({...user, [e.target.name]: e.target.value});
@@ -40,11 +53,11 @@ function CreateUser(props) {
           <span className="sr-only">Loading...</span>
         </Spinner> 
       } 
-        <Form onSubmit={saveUser}>
+        <Form onSubmit={updateUser}>
           <Form.Group>
             <Form.Label> First Name</Form.Label>
             <Form.Control type="text" name="firstName" id="firstName" placeholder="Enter first name" value={user.firstName} onChange={onChange} />
-          </Form.Group>
+            </Form.Group>
           <Form.Group>
             <Form.Label> Last Name</Form.Label>
             <Form.Control type="text" name="lastName" id="lastName" placeholder="Enter last name" value={user.lastName} onChange={onChange} />
@@ -57,20 +70,14 @@ function CreateUser(props) {
             <Form.Label>User Name</Form.Label>
             <Form.Control type="text" name="username" id="username" placeholder="Enter user name" value={user.username} onChange={onChange} />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name="password" id="password" placeholder="Enter password" value={user.password} onChange={onChange} />
-          </Form.Group>
           
-
-
+        
           <Button variant="primary" type="submit">
-            Save
+            Update
           </Button>
-
         </Form>
     </div>
   );
 }
 //
-export default CreateUser;
+export default EditUser;
