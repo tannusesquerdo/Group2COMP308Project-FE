@@ -105,13 +105,7 @@ const _nav = [
         name: "Medical Conditions List",
         to: "/nurse/medical-conditions-lists",
         roles: ["Nurse"],
-      },
-      {
-        component: CNavItem,
-        name: "Landing Page",
-        to: "/nurse/welcome",
-        roles: ["Nurse"],
-      },
+      },      
     ],
   },
 ];

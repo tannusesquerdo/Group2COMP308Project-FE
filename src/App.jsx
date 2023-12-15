@@ -23,6 +23,7 @@ const loading = (
 const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 const Layout = React.lazy(() => import("./layout/Layout"));
 const Public = React.lazy(() => import("./views/pages/Public"));
+const Landing = React.lazy(() => import("./views/nurse/Landing"));
 
 const Login = React.lazy(() => import("./views/pages/Login"));
 const VitalSignsInputForm = React.lazy(() =>
@@ -66,7 +67,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* public routes */}
-              <Route index path="/" element={<Public />} />
+              <Route index path="/" element={<Landing />} />
               <Route path="login" element={<Login />} />
 
               {/* Protected Routes */}

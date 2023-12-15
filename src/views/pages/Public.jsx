@@ -11,7 +11,7 @@ const Public = () => {
         </h1>
       </header>
       <footer>
-        <CButton as={<Link to="/login" />}>Login</CButton>
+        <CButton component={Link} to = {'/login'}>Login</CButton>
       </footer>
     </section>
   );
