@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import Spinner from "react-bootstrap/Spinner";
 import { toast } from "react-toastify";
-import { CREATE_DAILY_VITALS } from "../../graphql/mutations";
+import { CREATE_DAILY_VITAL } from "../../graphql/mutations";
 import { useNavigate } from "react-router-dom";
 import {
   CCard,
@@ -28,7 +28,7 @@ const CreateDailyVital = () => {
     patientId: "",
   });
   const [createDailyVital, { loading, error }] =
-    useMutation(CREATE_DAILY_VITALS);
+    useMutation(CREATE_DAILY_VITAL);
 
   if (loading) return <Spinner animation="border" />;
   if (error) return `Submission error! ${error.message}`;

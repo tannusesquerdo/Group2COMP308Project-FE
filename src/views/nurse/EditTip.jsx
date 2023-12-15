@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useParams, useNavigate } from 'react-router-dom';
-import {GET_TIPS, UPDATE_TIPS} from '../../graphql/mutations';
+import { UPDATE_TIPS} from '../../graphql/mutations';
+import { GET_TIP } from '../../graphql/queries';
 import { toast } from 'react-toastify';
 import {
   CCard,
@@ -19,7 +20,7 @@ import Button from 'react-bootstrap/Button';
 function EditTip() {
     let navigate = useNavigate();
     let { id } = useParams();
-    const { loading, error, data } = useQuery(GET_TIPS, {
+    const { loading, error, data } = useQuery(GET_TIP, {
         variables: { id }
     });
     const [updateTip] = useMutation(UPDATE_TIPS);

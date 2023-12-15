@@ -4,7 +4,8 @@ import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
-import { GET_USERS, DELETE_USER } from "../../graphql/mutations"; // Adjust this import path as necessary
+import { DELETE_USER } from "../../graphql/mutations"; // Adjust this import path as necessary
+import { GET_USERS } from "../../graphql/queries"; // Adjust this import path as necessary
 
 import {
   CCard,

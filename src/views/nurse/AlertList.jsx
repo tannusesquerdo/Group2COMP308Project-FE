@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import Spinner from 'react-bootstrap/Spinner';
-import { GET_ALERTS , DELETE_ALERT } from '../../graphql/mutations';
+import { DELETE_ALERT } from '../../graphql/mutations';
+import { GET_ALERT } from '../../graphql/queries';
 
 import { Link } from 'react-router-dom';
 import {
@@ -19,7 +20,7 @@ import {
 } from '@coreui/react';
 import Button from 'react-bootstrap/Button';
 function AlertList() {
-    const { loading, error, data, refetch } = useQuery(GET_ALERTS);
+    const { loading, error, data, refetch } = useQuery(GET_ALERT);
     const [deleteAlert] = useMutation(DELETE_ALERT, {
         onCompleted: () => refetch()
     });

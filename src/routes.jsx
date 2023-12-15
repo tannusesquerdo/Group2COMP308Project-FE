@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+const Landing = React.lazy(() => import('./views/nurse/Landing')); // Added on 12/14/2023 by TJ
 //Nurse
 const VitalSignsInputForm = React.lazy(() => import('./views/nurse/VitalSignsInputForm')); // Added on 12/04/2023 by TJ
 const PreviousClinicalVisitInfo = React.lazy(() => import('./views/nurse/PreviousClinicalVisitInfo')); // Added on 12/04/2023 by TJ
@@ -16,6 +18,7 @@ const CreateVitalAlert = React.lazy(() => import('./views/patient/CreateVitalAle
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  {path: '/nurse/welcome', name: 'Landing Page', element: Landing}, // Added on 12/14/2023 by TJ
   //Nurse
   { path: '/nurse/vital-signs-input-form', name: 'Vital Signs Input Form', element: VitalSignsInputForm }, // Added on 12/04/2023 by HK
   { path: '/nurse/list-tip', name: 'List Tip', element: ListTip }, // Added on 13/04/2023 by HK
