@@ -1,7 +1,8 @@
 import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Spinner from "react-bootstrap/Spinner";
-import { GET_TIPS , DELETE_TIPS } from "../../graphql/mutations";
+import { DELETE_TIPS} from '../../graphql/mutations';
+import { GET_TIP } from '../../graphql/queries';
 import { Link } from "react-router-dom";
 import {
   CCard,
@@ -21,7 +22,7 @@ import Button from "react-bootstrap/Button";
 
 
 function TipList() {
-  const { loading, error, data, refetch } = useQuery(GET_TIPS);
+  const { loading, error, data, refetch } = useQuery(GET_TIP);
   const [deleteTips] = useMutation(DELETE_TIPS, {
     onCompleted: () => refetch(),
   });

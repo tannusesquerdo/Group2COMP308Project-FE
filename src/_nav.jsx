@@ -134,6 +134,11 @@ const _nav = [
         component: CNavItem,
         name: 'Patient List',
         to: '/nurse/patients',
+      },
+      {
+        component : CNavItem,
+        name: 'Landing Page',
+        to: '/nurse/welcome',
       }
     ],
   },
