@@ -307,7 +307,11 @@ export const CREATE_ALERT = gql`
       message
       address
       phone
-      patient
+      patient {
+        _id
+        firstName
+        lastName
+      }
     }
   }
 `;
