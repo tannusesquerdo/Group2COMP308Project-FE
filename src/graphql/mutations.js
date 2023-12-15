@@ -324,3 +324,11 @@ export const DELETE_ALERT = gql`
     }
   }
 `;
+
+export const PREDICT = gql`
+  mutation prediction($id: ID!) {
+    prediction(id: $id) {
+      id
+    }
+  }
+`;
