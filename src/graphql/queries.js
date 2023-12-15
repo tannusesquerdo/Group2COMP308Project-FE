@@ -91,16 +91,14 @@ export const GET_ALERTS = gql`
 `;
 
 export const GET_DAILY_VITAL = gql`
-  query GetDailyVital($patient: ID!) {
+  query GetDailyVital($patient: String!) {
     getDailyVital(patient: $patient) {
       _id
       pulseRate
       bloodPresure
       weight
       temperature
-      respRate
       updateDate
-      patient
     }
   }
 `;

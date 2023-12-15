@@ -9,17 +9,22 @@
 
 import React, { useState, useEffect } from "react";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import { useQuery } from "@apollo/client";
+import { GET_DAILY_VITAL } from "../../graphql/queries";
+import useAuth from "../../hooks/useAuth";
 // Import other necessary components or data fetching functions as required
 
 function PreviousClinicalVisitInfo() {
+  const { user } = useAuth();
   const [previousVisits, setPreviousVisits] = useState([]);
 
-  // Simulated data fetch or integration with GraphQL API to retrieve previous clinical visits
+  const { data, loading, error } = useQuery(GET_DAILY_VITAL, {
+    variables: { patient: user._id },
+  });
+  console.log(data);
+
   useEffect(() => {
-    // Fetch previous clinical visit data here (simulate or integrate with GraphQL API)
-    // Update the 'previousVisits' state with the fetched data
     const fetchedData = [
-      // Example data structure for previous visits (replace this with actual fetched data)
       {
         id: 1,
         date: "2023-10-15",
