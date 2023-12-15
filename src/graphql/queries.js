@@ -1,85 +1,106 @@
-import { gql } from '@apollo/client';
-
+import { gql } from "@apollo/client";
+//queries read from database
 export const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn {
       status
       message
       data {
-        screen
         token
-        id
-        student {
-          id
+        user {
+          _id
+          email
           firstName
           lastName
-          email
+          roles
+          active
         }
       }
     }
   }
 `;
 
-export const GET_COURSES = gql`
-  query GetCourses {
-    courses {
-      id
-      courseCode
-      courseName
-      section
-      semester
-      students {
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`;
-
-export const GET_STUDENT = gql`
-  query GetStudent($id: ID!) {
-    student(id: $id) {
-      id
-      studentNumber
-      firstName
-      lastName
-      phone
-      program
+export const GET_USERS = gql`
+  query GetUsers {
+    getAllUsers {
+      _id
       email
-      password
-      favoriteTopic
-      strongestTechnicalSkill
-      courses {
-        id
-        courseCode
-        courseName
-        section
-        semester
-      }
-    }
-  }
-`;
-
-export const GET_STUDENT_COURSES = gql`
-  query GetStudentCourses($id: ID!) {
-    studentCourses(id: $id) {
-      id
-      courseCode
-      courseName
-      section
-      semester
-    }
-  }
-`;
-
-export const GET_STUDENTS = gql`
-  query GetStudents {
-    students {
-      id
-      studentNumber
       firstName
       lastName
+      roles
+      active
+      gender
+      dob
+    }
+  }
+`;
+
+export const GET_VITAL = gql`
+  query GetVital($patient: ID!) {
+    getVital(patient: $patient) {
+      _id
+      age
+      sex
+      cp
+      trestbps
+      chol
+      restecg
+      thalach
+      exang
+      oldpeak
+      slope
+      ca
+      thal
+      patient
+    }
+  }
+`;
+
+export const GET_TIP = gql`
+  query GetTip {
+    getTip {
+      _id
+      title
+      description
+    }
+  }
+`;
+
+export const GET_ALERT = gql`
+  query GetAlert($patient: ID!) {
+    getAlert(patient: $patient) {
+      _id
+      message
+      address
+      phone
+      patient
+    }
+  }
+`;
+
+export const GET_ALERTS = gql`
+  query GetAlerts {
+    getAlerts {
+      _id
+      message
+      address
+      phone
+      patient
+    }
+  }
+`;
+
+export const GET_DAILY_VITAL = gql`
+  query GetDailyVital($patient: ID!) {
+    getDailyVital(patient: $patient) {
+      _id
+      pulseRate
+      bloodPresure
+      weight
+      temperature
+      respRate
+      updateDate
+      patient
     }
   }
 `;
