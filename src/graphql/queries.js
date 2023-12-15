@@ -99,6 +99,7 @@ export const GET_DAILY_VITAL = gql`
       weight
       temperature
       updateDate
+      respRate
     }
   }
 `;

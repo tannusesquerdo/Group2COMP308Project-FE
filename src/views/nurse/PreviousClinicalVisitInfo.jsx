@@ -21,30 +21,12 @@ function PreviousClinicalVisitInfo() {
   const { data, loading, error } = useQuery(GET_DAILY_VITAL, {
     variables: { patient: user._id },
   });
-  console.log(data);
 
   useEffect(() => {
-    const fetchedData = [
-      {
-        id: 1,
-        date: "2023-10-15",
-        bodyTemperature: 98.6,
-        heartRate: 80,
-        bloodPressure: "120/80",
-        respiratoryRate: 18,
-      },
-      {
-        id: 2,
-        date: "2023-09-28",
-        bodyTemperature: 99.2,
-        heartRate: 75,
-        bloodPressure: "118/76",
-        respiratoryRate: 20,
-      },
-      // Add more visits if available
-    ];
-    setPreviousVisits(fetchedData);
-  }, []); // Fetch data on component mount
+    if (data?.getDailyVital.length > 0) {
+      setPreviousVisits(data.getDailyVital);
+    }
+  }, [data]); // Fetch data on component mount
 
   return (
     <CRow>
@@ -61,12 +43,12 @@ function PreviousClinicalVisitInfo() {
           </thead>
           <tbody>
             {previousVisits.map((visit) => (
-              <tr key={visit.id}>
-                <td>{visit.date}</td>
-                <td>{visit.bodyTemperature}</td>
+              <tr key={visit._id}>
+                <td>{visit.updateDate}</td>
+                <td>{visit.temperature}</td>
                 <td>{visit.heartRate}</td>
-                <td>{visit.bloodPressure}</td>
-                <td>{visit.respiratoryRate}</td>
+                <td>{visit.bloodPresure}</td>
+                <td>{visit.respRate}</td>
               </tr>
             ))}
           </tbody>
