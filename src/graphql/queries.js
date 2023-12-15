@@ -85,7 +85,10 @@ export const GET_ALERTS = gql`
       message
       address
       phone
-      patient
+      patient {
+        firstName
+        lastName
+      }
     }
   }
 `;
