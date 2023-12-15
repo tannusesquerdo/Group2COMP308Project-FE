@@ -1,10 +1,3 @@
-import {
-  selectCurrentToken,
-  selectCurrentUser,
-} from "store/slices/auth/auth.slice";
-
-import { useAppSelector } from "./reduxHooks";
-import { Roles } from "config/roles";
 import { useSelector } from "react-redux";
 
 const Roles = {
@@ -13,20 +6,20 @@ const Roles = {
 };
 
 const useAuth = () => {
-  const token = useAppSelector(selectCurrentToken);
+  const token = useSelector((state) => state.auth.token);
   let isPatient = false;
   let isNurse = false;
-  let status = "patient";
+  let status = "Patient";
 
   if (token) {
-    const user = useSelector(selectCurrentUser);
+    const user = useSelector((state) => state.auth.user);
     const { roles } = user;
 
     if (roles) {
-      isPatient = roles.includes(Roles.AGENT);
-      isNurse = roles.includes(Roles.EMPLOYEE);
+      isPatient = roles.includes(Roles.PATIENT);
+      isNurse = roles.includes(Roles.NURSE);
 
-      if (isAgent) status = "Patient";
+      if (isPatient) status = "Patient";
       if (isNurse) status = "Nurse";
 
       return { user, roles, status, isPatient, isNurse };
@@ -36,10 +29,8 @@ const useAuth = () => {
   return {
     user: {},
     roles: [],
-    isAgent,
-    isEmployee,
-    isCollege,
-    isAdmin,
+    isPatient,
+    isNurse,
     status,
   };
 };

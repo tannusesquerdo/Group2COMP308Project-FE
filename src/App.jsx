@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import {
   ApolloProvider,
@@ -62,22 +62,20 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Suspense fallback={loading}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* public routes */}
-            <Route index path="/" element={<Public />} />
-            <Route path="login" element={<Login />} />
-            <Route
-              path="vital-signs-input-form"
-              element={<VitalSignsInputForm />}
-            />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* public routes */}
+              <Route index path="/" element={<Public />} />
+              <Route path="login" element={<Login />} />
 
-            {/* Protected Routes */}
-            <Route path="*" element={<DefaultLayout />} />
-            {/* End Protected Routes */}
-          </Route>
-        </Routes>
-        <ToastContainer />
+              {/* Protected Routes */}
+              <Route path="*" element={<DefaultLayout />} />
+              {/* End Protected Routes */}
+            </Route>
+          </Routes>
+          <ToastContainer />
+        </BrowserRouter>
       </Suspense>
     </ApolloProvider>
   );

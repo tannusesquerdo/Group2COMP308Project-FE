@@ -54,15 +54,12 @@ const Login = () => {
         } = res.data;
         if (status === "error") {
           toast.error(message);
-          setValidated(false);
           return false;
         }
         setAuthState(status, data, dispatch);
-        setValidated(true);
-        navigate("/", { replace: true });
+        navigate("/dashboard", { replace: true });
       } catch (e) {
         console.log(e);
-        setValidated(false);
       }
     }
   };
@@ -102,8 +99,7 @@ const Login = () => {
             isLoggedIn: { data, status },
           } = isLoggedInData;
           setAuthState(status, data, dispatch);
-          setValidated(true);
-          navigate("/", { replace: true });
+          navigate("/dashboard", { replace: true });
         } catch (e) {
           dispatch({
             type: "set",
@@ -124,11 +120,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm
-                    noValidate
-                    validated={validated}
-                    onSubmit={authenticateUser}
-                  >
+                  <CForm onSubmit={authenticateUser}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account

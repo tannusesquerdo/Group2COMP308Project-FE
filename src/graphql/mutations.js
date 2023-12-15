@@ -6,11 +6,9 @@ export const LOGIN = gql`
       status
       message
       data {
-        screen
         token
-        id
         user {
-          id
+          _id
           email
           firstName
           lastName
@@ -65,7 +63,7 @@ export const ADD_VITAL = gql`
       updateDate: $updateDate
       patient: $patient
     ) {
-      id
+      _id
       age
       sex
       cp
@@ -125,7 +123,7 @@ export const UPDATE_VITAL = gql`
       updateDate: $updateDate
       patient: $patient
     ) {
-      id
+      _id
       age
       sex
       cp
@@ -149,7 +147,7 @@ export const UPDATE_VITAL = gql`
 export const DELETE_VITAL = gql`
   mutation DeleteVital($id: ID!) {
     deleteVital(id: $id) {
-      id
+      _id
     }
   }
 `;
@@ -159,8 +157,9 @@ export const ADD_USER = gql`
     $password: String!
     $firstName: String!
     $lastName: String!
-    $roles: String!
-    $active: Boolean!
+    $roles: [String]!
+    $gender: String!
+    $dob: String!
   ) {
     createNewUser(
       email: $email
@@ -168,15 +167,19 @@ export const ADD_USER = gql`
       firstName: $firstName
       lastName: $lastName
       roles: $roles
-      active: $active
+      gender: $gender
+      dob: $dob
     ) {
-      id
-      email
-      password
-      firstName
-      lastName
-      roles
-      active
+      status
+      message
+      data {
+        _id
+        email
+        firstName
+        lastName
+        roles
+        active
+      }
     }
   }
 `;
@@ -190,6 +193,8 @@ export const UPDATE_USER = gql`
     $lastName: String!
     $roles: String!
     $active: Boolean!
+    $gender: String!
+    $dob: String!
   ) {
     updateUser(
       id: $id
@@ -199,14 +204,18 @@ export const UPDATE_USER = gql`
       lastName: $lastName
       roles: $roles
       active: $active
+      gender: $gender
+      dob: $dob
     ) {
-      id
+      _id
       email
       password
       firstName
       lastName
       roles
       active
+      gender
+      dob
     }
   }
 `;
@@ -214,7 +223,7 @@ export const UPDATE_USER = gql`
 export const DELETE_USER = gql`
   mutation DeleteUser($id: ID!) {
     deleteUser(id: $id) {
-      id
+      _id
       email
       password
       firstName

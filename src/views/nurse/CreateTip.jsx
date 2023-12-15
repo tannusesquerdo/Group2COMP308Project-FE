@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { CREATE_TIP } from '../../graphql/mutations';
+import React, { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { CREATE_TIP } from "../../graphql/mutations";
 import {
   CCard,
   CCardBody,
@@ -10,38 +10,39 @@ import {
   CCol,
   CRow,
   CForm,
-  CFormLabel
-} from '@coreui/react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+  CFormLabel,
+  CFormTextarea,
+  CFormInput,
+} from "@coreui/react";
+import Button from "react-bootstrap/Button";
 
 function CreateTip() {
   const navigate = useNavigate();
   const [tip, setTip] = useState({
-    title: '',
-    description: ''
+    title: "",
+    description: "",
   });
   const [createTip, { loading, error }] = useMutation(CREATE_TIP);
 
-  if (loading) return 'Submitting...';
+  if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     createTip({
       variables: {
         title: tip.title,
-        description: tip.description
-      }
+        description: tip.description,
+      },
     });
 
     setTip({
-      title: '',
-      description: ''
+      title: "",
+      description: "",
     });
 
-    toast.success('Tip created successfully');
-    navigate('/tips');
+    toast.success("Tip created successfully");
+    navigate("/tips");
   };
 
   const onChange = (e) => {
@@ -58,13 +59,27 @@ function CreateTip() {
           <CCardBody>
             <CForm onSubmit={handleSubmit}>
               <div className="mb-3">
-                <CFormLabel htmlFor='title'>Title</CFormLabel>
-                <Form.Control type="text" name="title" id="title" placeholder="Enter Title" value={tip.title} onChange={onChange} />
+                <CFormLabel htmlFor="title">Title</CFormLabel>
+                <CFormInput
+                  type="text"
+                  name="title"
+                  id="title"
+                  placeholder="Enter Title"
+                  value={tip.title}
+                  onChange={onChange}
+                />
               </div>
-              
+
               <div className="mb-3">
-                <CFormLabel htmlFor='description'>Description</CFormLabel>
-                <Form.Control as="textarea" name="description" id="description" placeholder="Enter Description" value={tip.description} onChange={onChange} />
+                <CFormLabel htmlFor="description">Description</CFormLabel>
+                <CFormTextarea
+                  as="textarea"
+                  name="description"
+                  id="description"
+                  placeholder="Enter Description"
+                  value={tip.description}
+                  onChange={onChange}
+                />
               </div>
 
               <Button variant="primary" type="submit">

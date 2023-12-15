@@ -6,11 +6,9 @@ export const IS_LOGGED_IN = gql`
       status
       message
       data {
-        screen
         token
-        id
         user {
-          id
+          _id
           email
           firstName
           lastName
@@ -25,12 +23,14 @@ export const IS_LOGGED_IN = gql`
 export const GET_USERS = gql`
   query GetUsers {
     getAllUsers {
-      id
+      _id
       email
       firstName
       lastName
       roles
       active
+      gender
+      dob
     }
   }
 `;
@@ -38,7 +38,7 @@ export const GET_USERS = gql`
 export const GET_VITAL = gql`
   query GetVital($patient: ID!) {
     getVital(patient: $patient) {
-      id
+      _id
       age
       sex
       cp
@@ -59,7 +59,7 @@ export const GET_VITAL = gql`
 export const GET_TIP = gql`
   query GetTip {
     getTip {
-      id
+      _id
       title
       description
     }
@@ -69,7 +69,7 @@ export const GET_TIP = gql`
 export const GET_ALERT = gql`
   query GetAlert($patient: ID!) {
     getAlert(patient: $patient) {
-      id
+      _id
       message
       address
       phone
@@ -81,7 +81,7 @@ export const GET_ALERT = gql`
 export const GET_ALERTS = gql`
   query GetAlerts {
     getAlerts {
-      id
+      _id
       message
       address
       phone
@@ -93,7 +93,7 @@ export const GET_ALERTS = gql`
 export const GET_DAILY_VITAL = gql`
   query GetDailyVital($patient: ID!) {
     getDailyVital(patient: $patient) {
-      id
+      _id
       pulseRate
       bloodPresure
       weight
