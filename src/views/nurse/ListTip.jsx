@@ -1,8 +1,8 @@
 import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Spinner from "react-bootstrap/Spinner";
-import { DELETE_TIPS} from '../../graphql/mutations';
-import { GET_TIP } from '../../graphql/queries';
+import { DELETE_TIPS } from "../../graphql/mutations";
+import { GET_TIP } from "../../graphql/queries";
 import { Link } from "react-router-dom";
 import {
   CCard,
@@ -19,7 +19,6 @@ import {
 } from "@coreui/react";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
-
 
 function TipList() {
   const { loading, error, data, refetch } = useQuery(GET_TIP);
@@ -50,7 +49,9 @@ function TipList() {
           </CCardHeader>
           <CCardBody>
             <Link to="/add-tip">
-              <Button color="primary" variant="contained">Add Tip</Button>
+              <Button color="primary" variant="contained">
+                Add Tip
+              </Button>
             </Link>
             <CTable striped hover>
               <CTableHead>
@@ -61,12 +62,17 @@ function TipList() {
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {data.tips.map((tip) => (
+                {data.getTip.map((tip) => (
                   <CTableRow key={tip._id}>
                     <CTableDataCell>{tip.title}</CTableDataCell>
                     <CTableDataCell>{tip.description}</CTableDataCell>
                     <CTableDataCell>
-                      <Button variant="danger" onClick={() => handleDelete(tip._id)}>Delete</Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(tip._id)}
+                      >
+                        Delete
+                      </Button>
                       <Link to={`/edit-tip/${tip._id}`}>
                         <Button variant="primary">Edit</Button>
                       </Link>

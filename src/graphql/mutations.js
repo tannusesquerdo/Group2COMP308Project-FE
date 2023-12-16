@@ -263,17 +263,17 @@ export const UPDATE_TIPS = gql`
 
 export const CREATE_DAILY_VITAL = gql`
   mutation CreateDailyVital(
-    $pulseRate: Float!
-    $bloodPresure: Float!
-    $weight: Float!
-    $temperature: Float!
-    $respRate: Float!
-    $updateDate: DateTime!
-    $patient: ID!
+    $pulseRate: String!
+    $bloodPressure: String!
+    $weight: String!
+    $temperature: String!
+    $updateDate: String!
+    $respRate: String!
+    $patient: String!
   ) {
     createNewDailyVital(
       pulseRate: $pulseRate
-      bloodPresure: $bloodPresure
+      bloodPressure: $bloodPressure
       weight: $weight
       temperature: $temperature
       respRate: $respRate
@@ -281,12 +281,16 @@ export const CREATE_DAILY_VITAL = gql`
       patient: $patient
     ) {
       pulseRate
-      bloodPresure
+      bloodPressure
       weight
       temperature
       respRate
       updateDate
-      patient
+      patient {
+        _id
+        firstName
+        lastName
+      }
     }
   }
 `;

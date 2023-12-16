@@ -15,8 +15,10 @@ import {
 } from "@coreui/react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import useAuth from "../../hooks/useAuth";
 
 const CreateDailyVital = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [dailyVital, setDailyVital] = useState({
     pulseRate: "",
@@ -25,7 +27,7 @@ const CreateDailyVital = () => {
     temperature: "",
     respRate: "",
     updateDate: "",
-    patient: "",
+    patient: user._id,
   });
   const [createDailyVital, { loading, error }] =
     useMutation(CREATE_DAILY_VITAL);
@@ -37,13 +39,13 @@ const CreateDailyVital = () => {
     e.preventDefault();
     createDailyVital({
       variables: {
-        pulseRate: parseFloat(dailyVital.pulseRate),
-        bloodPressure: parseFloat(dailyVital.bloodPressure),
-        weight: parseFloat(dailyVital.weight),
-        temperature: parseFloat(dailyVital.temperature),
-        respRate: parseFloat(dailyVital.respRate),
-        updateDate: new Date(dailyVital.updateDate),
-        patientId: dailyVital.patientId,
+        pulseRate: dailyVital.pulseRate,
+        bloodPressure: dailyVital.bloodPressure,
+        weight: dailyVital.weight,
+        temperature: dailyVital.temperature,
+        respRate: dailyVital.respRate,
+        updateDate: dailyVital.updateDate,
+        patient: dailyVital.patient,
       },
     });
 
@@ -54,11 +56,10 @@ const CreateDailyVital = () => {
       temperature: "",
       respRate: "",
       updateDate: "",
-      patientId: "",
+      patient: "",
     });
 
     toast.success("Daily vital recorded successfully");
-    navigate("/");
   };
 
   const onChange = (e) => {
