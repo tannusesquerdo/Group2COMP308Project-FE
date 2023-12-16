@@ -23,8 +23,21 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CCard, CCardBody, CCardHeader, CCol, CRow, CForm, CFormLabel } from '@coreui/react';
 import { toast } from 'react-toastify';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_USERS } from '../../graphql/queries';
+import { ADD_VITAL } from '../../graphql/mutations';
+import { GET_VITAL } from '../../graphql/queries';
+//Import mutation for prediction
+import { PREDICT } from '../../graphql/mutations';
+import { useParams } from 'react-router-dom';
 
-function VitalSignsInputForm({ patientId }) {
+const VitalSignsInputForm = () =>{
+  
+  const [user, setUser] = useState([]);
+  const params = new useParams();
+  const { patientId } = params;
+  const [getUsers] = useQuery(GET_USERS);
+  
   const [vitals, setVitals] = useState({
     age: '',
     sex: '',
@@ -44,11 +57,59 @@ function VitalSignsInputForm({ patientId }) {
     patient: patientId,
   });
 
-  const saveVitalSigns = async (e) => {
+  const [addVitalMutation] = useMutation(ADD_VITAL, {
+    update(cache, { data: { addVital } }) {
+      const { vitals } = cache.readQuery({ query: GET_VITAL });
+      cache.writeQuery({
+        query: GET_VITAL,
+        data: { vitals: [...vitals, addVital] },
+      });
+    },
+  });
+
+  // Start of Prediction calling block
+  const [predictMutation] = useMutation(PREDICT)
+  
+  const callPredict = async (e, patientId) => {
     e.preventDefault();
-    // Logic to handle saving vital signs to the database
-    toast.success('Vital signs recorded successfully');
-    // Additional logic for saving data to the database
+    try {
+      const { data } = await predictMutation({
+        variables: {
+          patientId: patientId,
+        },
+      });
+      toast.success('Prediction successful:' + data.predict);
+    } catch (err) {
+      console.error('Error in prediction');
+    }
+  };
+  // End of Prediction calling block
+
+  const saveVitalSigns = (e) => {
+    e.preventDefault();
+    const data = {
+      age: vitals.age,
+      sex: vitals.sex,
+      cp: vitals.cp,
+      trestbps: vitals.trestbps,
+      chol: vitals.chol,
+      fbs: vitals.fbs,
+      restecg: vitals.restecg,
+      thalach: vitals.thalach,
+      exang: vitals.exang,
+      oldpeak: vitals.oldpeak,
+      slope: vitals.slope,
+      ca: vitals.ca,
+      thal: vitals.thal,
+      num: 0,
+      updateDate: new Date(),
+      patient: patientId,
+    }
+    addVitalMutation({
+       variables: { ...data },
+    }).then(() => {
+      toast.success('Vital signs recorded successfully');
+    }).catch((err) => console.error(err));
   };
 
   const handleChange = (e) => {
@@ -187,6 +248,9 @@ function VitalSignsInputForm({ patientId }) {
 
               <Button variant="primary" type="submit">
                 Save Vital Signs
+              </Button>
+              <Button variant="primary" type="button" size="lg" onClick={() => callPredict(vitals.patientId)}>
+                Predict
               </Button>
             </CForm>
           </CCardBody>
